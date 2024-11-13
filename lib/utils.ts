@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+// INI ADALAHA FUNGSI UNTUK MEMBUAT HURUF DEPAN JADI CAPITAL
 export function formatCapitalize(str: string) {
   if (str.includes("@")) {
     return str;
@@ -16,6 +17,7 @@ export function formatCapitalize(str: string) {
     .join(" ");
 }
 
+// INI ADALAHA FUNGSI UNTUK MEMBUAT MENAMPILKAN TITLE DI VIEW OPTION TABLE
 export const renderTitle = (columnName: string) => {
   switch (columnName) {
     case "name":

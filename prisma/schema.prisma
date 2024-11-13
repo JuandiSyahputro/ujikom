@@ -21,3 +21,112 @@ model data {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 }
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model Users {
+  id         String       @id @default(cuid())
+  namaUser   String       @unique @map("nama_user")
+  password   String
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  Peminjaman Peminjaman[]
+  Session    Session[]
+
+  @@map("user")
+}
+
+model Anggota {
+  id         String       @id @default(cuid())
+  nama       String
+  alamat     String
+  noHp       String       @map("no_hp")
+  email      String       @unique
+  tglLahir   DateTime     @map("tgl_lahir")
+  tglDaftar  DateTime     @map("tgl_daftar")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+  Peminjaman Peminjaman[]
+
+  @@map("anggota")
+}
+
+model Denda {
+  id        String   @id @default(cuid())
+  nominal   Float    @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  Peminjaman Peminjaman[]
+
+  @@map("denda")
+}
+
+model Peminjaman {
+  id           String   @id @default(cuid())
+  tglPinjam    DateTime @default(now()) @map("tgl_pinjam")
+  lamaPinjaman String   @map("lama_pinjaman")
+  nominalDenda Float    @default(0) @map("nominal_denda")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  userId       String   @map("user_id")
+  anggotaId    String   @map("anggota_id")
+  dendaId      String   @map("denda_id")
+  bukuId       String   @map("buku_id")
+
+  user         Users          @relation(fields: [userId], references: [id])
+  anggota      Anggota        @relation(fields: [anggotaId], references: [id])
+  denda        Denda          @relation(fields: [dendaId], references: [id])
+  buku         Buku           @relation(fields: [bukuId], references: [id])
+  DetailPinjam DetailPinjam[]
+
+  @@map("peminjaman")
+}
+
+model DetailPinjam {
+  id           String    @id @default(cuid())
+  tglKembali   DateTime? @map("tgl_kembali")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  peminjamanId String    @map("peminjaman_id")
+
+  peminjaman Peminjaman @relation(fields: [peminjamanId], references: [id], onDelete: Cascade)
+
+  @@map("detail_peminjaman")
+}
+
+model Buku {
+  id         String   @id @default(cuid())
+  judul      String
+  pengarang  String
+  penerbit   String
+  tahun      String
+  isbn       String
+  tglInput   DateTime @default(now()) @map("tgl_input")
+  jmlHalaman Int      @default(0) @map("jml_halaman")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+  kategoriId String   @map("kategori_id")
+
+  kategori KategoriBuku @relation(fields: [kategoriId], references: [id])
+
+  Peminjaman Peminjaman[]
+
+  @@map("buku")
+}
+
+model KategoriBuku {
+  id        String   @id @default(cuid())
+  kategori  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Buku      Buku[]
+}
