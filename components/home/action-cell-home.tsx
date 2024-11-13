@@ -6,7 +6,7 @@ import { MoreHorizontal, SquarePen, Trash2 } from "lucide-react";
 import AlertDialogConfirmation from "@/components/reusable/alert-dialog-confirmation";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { deleteData } from "@/lib/bungkus-actions";
+import { deleteData } from "@/lib/wrapper-actions";
 import Link from "next/link";
 import { useState } from "react";
 

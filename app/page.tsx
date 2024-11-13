@@ -1,7 +1,7 @@
 import { columnHome } from "@/app/data-column-home";
 import { DataTable } from "@/components/data-table";
 import { Button } from "@/components/ui/button";
-import { fetchData } from "@/lib/bungkus-fetch";
+import { fetchData } from "@/lib/wrapper-fetch";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 const Home = async () => {

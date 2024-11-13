@@ -1,5 +1,5 @@
 import FormAddHome from "@/components/home/form-input-home";
-import { fetchDataById } from "@/lib/bungkus-fetch";
+import { fetchDataById } from "@/lib/wrapper-fetch";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";

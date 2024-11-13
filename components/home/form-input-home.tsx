@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import SpinnnerAnimate from "@/components/ui/spinner";
-import { addData, updateData } from "@/lib/bungkus-actions";
+import { addData, updateData } from "@/lib/wrapper-actions";
 import { formatCapitalize } from "@/lib/utils";
 import { dataSchema } from "@/lib/zod";
 import { zodResolver } from "@hookform/resolvers/zod";
